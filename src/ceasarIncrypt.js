@@ -21,6 +21,7 @@ function decode(cypher, key) {
         readyWord += String.fromCharCode(arrayWords[i]);
     }
     
+    // Не хочу не буду!
     return readyWord;
 }
 
