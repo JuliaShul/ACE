@@ -16,8 +16,8 @@ function decode(words, numbers) {
 }
 
 function encode(words) {
-    words.split('').map((item) => item.charCodeAt());
-    var numbers = randomNumberString();
+    var arrayWords = words.split('').map((item) => item.charCodeAt());
+    var numbers = randomNumberString(words.length);
     for (let i = 0; i < arrayWords.length; i++) {
         arrayWords[i] += numbers[i];
         if (arrayWords[i] > 90) {
@@ -28,7 +28,10 @@ function encode(words) {
     for (var i = 0; i < arrayWords.length; i++) {
         readyWord += String.fromCharCode(arrayWords[i]);
     }
-    return readyWord;
+    return {
+        encrypt: readyWord,
+        key: numbers.joint('');
+    };
 }
 
 function random(min, max) {
