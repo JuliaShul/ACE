@@ -1,12 +1,9 @@
 const { decode, encode } = require('../src/ceasarIncrypt');
 
 describe('Ceasar Incrypt', () => {
-    describe('decode', () => {
-        const decodeString = decode();
-        expect(decodeString).toBe('HELLOGUYSHOWAREYOU');
-    });
-
-    describe('encode', () => {
-        encode('HELLOGUYSHOWAREYOU').toBe();
+    it('', () => {
+        const encoded = encode('HELLOWORLD');
+        const decodeString = decode('JHOSPATWMF', '2337145512');
+        expect(decodeString).toBe('HELLOWORLD');
     });
 })
