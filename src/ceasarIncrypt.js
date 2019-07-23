@@ -1,73 +1,63 @@
 // @TODO Напиши, что делает функция и аргументы.
 // Напиши какой тип данных должен быть у аргументов для этого почитай
 // https://ru.wikipedia.org/wiki/JSDoc
-// Переделай аргументы на объект, пусть нужные значени будут свойствами объекта:
-// например: params = { arg1: bla, arg2: bla }
 // заодно почтай про https://learn.javascript.ru/destructuring
-function decode(cypher, key) {
-    var arrayWords = cypher.split('').map((item) => item.charCodeAt());
-    key.split('');
-
-    // @TODO Перепиши на Reduce.
-    for (var i = 0; i < arrayWords.length; i++) {
-        arrayWords[i] += Number(key[i]);
-        if (arrayWords[i] > 90) {
-            arrayWords[i] -= 26;
-        }
+/*
+decode расшифровывает значения в объекте.
+@param(object) key - зашифрованное предложение(string), cypher[key] - массив-ключ для расшифровки
+*/
+function decode(cypher) {
+    for (var key in cypher) {
+        var arrayWords = key.split('').map((item) => item.charCodeAt());
+        var keyAll = cypher[key];
     }
-    // @TODO Перепиши на Reduce.
+    // @TODO Перепиши на Reduce. Не знаю как переписать.
+    for (var i = 0; i < arrayWords.length; i++) {
+        arrayWords[i] -= keyAll[i];
+    }
+    arrayWords.reduce((a, b) => b + Number(a), key)
     var readyWord = '';
-    for (var i = 0; i < arrayWords.length; i++) {
-        readyWord += String.fromCharCode(arrayWords[i]);
-    }
-    
-    // Не хочу не буду!
+    readyWord = arrayWords.reduce((a, b) => a += String.fromCharCode(b), readyWord);
     return readyWord;
 }
 
-// @TODO Напиши, что делает функция и аргументы.
-// Напиши какой тип данных должен быть у аргументов для этого почитай
-// https://ru.wikipedia.org/wiki/JSDoc
-// Передалый возвращаемое значние на объект
-// например: answer = { key1: bla, key2: bla }
+/*
+encode зашифровывает строку, 
+возвращает объект со свойством(зашифрованная строка), значением свойства(массив-ключ для расшифровки)
+@param(string)
+*/
 function encode(words) {
-    words.split('').map((item) => item.charCodeAt());
-    
-    var numbers = randomNumberString();
-
+    /*
+    random создает рандомные значения от 1 до 9.
+    @param(number) min - минимальное значение, max - максимальное значение.
+    */
+    function random(min, max) {
+        return Math.floor(Math.random() * (max - min)) + min;
+    }
+    /*
+    randomNumberArray возвращает новый массив с рандомными числами.
+    @param(number) length - длина массива.
+    */
+    function randomNumberArray(length) {
+        var randomNumbersPool = [];
+        for (let i = 0; i < length; i++) {
+            randomNumbersPool.push(random(1, 9));
+        }
+        return randomNumbersPool;
+    }
+    var arrayWords = words.split('').map((item) => item.charCodeAt());
+    var numbers = randomNumberArray(words.length);
     // @TODO Перепиши на Reduce.
     for (let i = 0; i < arrayWords.length; i++) {
         arrayWords[i] += numbers[i];
-        if (arrayWords[i] > 90) {
-            arrayWords[i] -= 26;
-        }
     }
-    // @TODO Перепиши на Reduce.
     var readyWord = '';
-    for (var i = 0; i < arrayWords.length; i++) {
-        readyWord += String.fromCharCode(arrayWords[i]);
-    }
-
-    return readyWord;
+    readyWord = arrayWords.reduce((a, b) => a += String.fromCharCode(b), readyWord);
+    var newArrayWords = {};
+    newArrayWords[readyWord] = numbers;
+    return newArrayWords;
 }
-
-// @TODO Напиши, что делает функция и аргументы.
-// Напиши какой тип данных должен быть у аргументов для этого почитай
-// https://ru.wikipedia.org/wiki/JSDoc
-function random(min, max) {
-    return Math.floor(Math.random() * (max - min)) + min;
-}
-
-// @TODO Напиши, что делает функция и аргументы.
-// Напиши какой тип данных должен быть у аргументов для этого почитай
-// https://ru.wikipedia.org/wiki/JSDoc
-function randomNumberString(length) {
-    const randomNumbersPool = [];
-    for (let i = 0; i < length; i++) {
-        randomNumbersPool.push(random(1, 9));
-    }
-    return randomNumbersPool
-}
+console.log(decode(encode('HELLOGYSHOWAREYOU')))
 
 module.exports = {
     decode,
