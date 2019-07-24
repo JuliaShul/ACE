@@ -9,10 +9,12 @@ function decode({ key, cypher }) {
         .split('')
         .map((item) => item.charCodeAt())
         .reduce((acc, item, i) => {
-            acc.push(item - key[i].split(''));
+            acc.push(String.fromCharCode(item - key[i].split(''))); 
+            //key[i].split('') меняет сроку на массив чисел
+            //вычитаем итый элемент массива key из массива cypher
             return acc;
         }, [])
-        .reduce((aсс, item) => aсс += String.fromCharCode(item), '');
+        .join('');
 }
 
 /**
@@ -24,16 +26,15 @@ function encode(words) {
     const numbers = randomNumberArray(words.length);
     const arrayWords = words
         .split('')
-        .map((item) => item.charCodeAt())
         .reduce((acc, item, i) => {
-            acc.push(item + numbers[i]);
+            acc.push(String.fromCharCode(item.charCodeAt() + numbers[i]));
             return acc;
         }, [])
-        .reduce((acc, item) => acc += String.fromCharCode(item), '');
-    const encodedWords = {};
-    encodedWords.key = numbers.join('');
-    encodedWords.cypher = arrayWords;
-    return encodedWords;
+        .join('')
+    return {
+        key: numbers.join(''),
+        cypher: arrayWords,
+    };
 }
 
 /**
