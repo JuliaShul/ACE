@@ -5,13 +5,11 @@
  * cypher (string) - зашифрованное предложение, содержит буквы.
  */
 function decode({ key, cypher }) {
+    key.split('');
     return cypher
         .split('')
-        .map((item) => item.charCodeAt())
         .reduce((acc, item, i) => {
-            acc.push(String.fromCharCode(item - key[i].split(''))); 
-            //key[i].split('') меняет сроку на массив чисел
-            //вычитаем итый элемент массива key из массива cypher
+            acc.push(String.fromCharCode(item.charCodeAt() - key[i]));
             return acc;
         }, [])
         .join('');
