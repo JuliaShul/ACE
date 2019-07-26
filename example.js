@@ -5,5 +5,10 @@ const initString = 'HELLOWORLD';
 const encoded = encode('HELLOWORLD');
 console.log('encoded', encoded);
 
-const decoded = decode(encoded.cypher, encoded.key);
+console.log('encoded', encode('ZoRrO'));
+console.log('encoded', encode('ASDF'));
+console.log('encoded', encode('123ADSAD'));
+console.log('encoded', encode('123asdasd'));
+
+const decoded = decode(encoded);
 console.log('decoded', decoded, decoded === initString);
