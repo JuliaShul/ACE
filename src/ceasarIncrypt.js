@@ -18,7 +18,7 @@ function decode({ key, cypher }) {
         .reduce((acc, item, i) => {
             const encodedLetter = item.charCodeAt() - keyArray[i];
             const letterCode = encodedLetter < ABC_A_CHARCODE
-                ? encodedLetter + ABC_LETTERS_COUNT + 1
+                ? encodedLetter + ABC_LETTERS_COUNT + 2
                : encodedLetter;
             acc.push(String.fromCharCode(letterCode));
             return acc;
