@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "prettier": "prettier --check 'src/**/*.js'",
+    "prettier-format": "prettier --write 'src/**/*.js'"
   },
   "author": "",
   "license": "ISC",
@@ -14,6 +16,7 @@
     "prettier": "^1.18.2"
   },
   "prepush": [
-    "npm test"
+    "npm test",
+    "npm run prettier"
   ]
 }
