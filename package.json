@@ -10,7 +10,10 @@
   "license": "ISC",
   "dependencies": {
     "jest": "^24.8.0",
-    "prepush": "^3.1.11"
+    "prepush": "^3.1.11",
+    "prettier": "^1.18.2"
   },
-  "prepush": ["npm test"]
+  "prepush": [
+    "npm test"
+  ]
 }
